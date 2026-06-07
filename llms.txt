@@ -19,6 +19,11 @@
 - `skills/computer-manager-host-setup/` — agent skill: install/run/secure/
   verify/troubleshoot the manager on a target machine; bundles both
   binaries in `assets/` for air-gapped installs.
+- `skills/computer-manager-api/` — agent skill: drive the manager directly
+  over HTTP — full endpoint catalog (system/terminal/files/RPA/awareness/
+  window/workflows) + the complete `desktop` sidecar reference (8 modes,
+  exit codes). A live manager also self-documents: GET /openapi.json,
+  /llm.txt, /llm-cli.txt.
 
 ## Install (on the machine to be controlled)
 

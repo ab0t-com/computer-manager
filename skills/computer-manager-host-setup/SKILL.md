@@ -165,6 +165,10 @@ Pin a known-good version explicitly with `REF=v<tag>`.
   verification step fails: connection refused, 401, empty screenshots,
   sidecar not found, checksum mismatch, port conflicts, rollback paths.
 
+Once the host is up, advanced control (raw HTTP API, all RPA/awareness/
+window/workflow routes, full desktop-sidecar reference) is the sibling
+skill: `computer-manager-api`.
+
 ## Bundled assets
 
 - `assets/computer-manager` — the manager binary (static linux-amd64)
