@@ -1,0 +1,15 @@
+# Local agent / editor settings — never published
+.claude/
+.idea/
+.vscode/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Build scratch (the shipped binary lives in release/ and IS tracked)
+*.tmp
+*.log
+
+# Note: release/computer-manager is intentionally committed — the built binary
+# is the point of this repo. Do not ignore release/.

@@ -1,0 +1,70 @@
+# computer-manager
+
+> Single static Go binary that turns a Linux machine (GUI desktop, headless
+> sandbox, container, cloud VM) into a remotely controllable computer over a
+> token-authenticated HTTP API on :1337. This file is the **bootstrap
+> entrypoint for an AI agent** that needs to install, run, or reason about
+> the manager. The client/controller half of the pair is `computer-agent`
+> (github.com/ab0t-com/computer-agent) — prefer driving machines through
+> that CLI rather than raw HTTP.
+
+## What this repo ships
+
+- `release/computer-manager` — the manager binary (static linux-amd64, no deps).
+- `release/desktop` — perception sidecar CLI (X11 + AT-SPI: catalog/query/
+  await/watch/diff). Installed next to the manager; optional.
+- `release/checksums.txt` + `release/VERSION` — verify everything you download.
+- `install.sh` — POSIX, HTTPS-only, sha256-mandatory installer for both.
+- `docs/USAGE.md` — env vars, endpoint groups, GUI prereqs, ops notes.
+
+## Install (on the machine to be controlled)
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/ab0t-com/computer-manager/main/install.sh | sh
+# pin:    REF=v0.1.0 curl -fsSL .../install.sh | sh
+# no-sudo: PREFIX=$HOME/.local curl -fsSL .../install.sh | sh
+# skip perception sidecar: SKIP_DESKTOP=1 curl -fsSL .../install.sh | sh
+```
+
+## Run
+
+```sh
+MANAGER_API_TOKEN=$(openssl rand -hex 32) computer-manager   # binds 0.0.0.0:1337
+DISPLAY=:1 MANAGER_API_TOKEN=... computer-manager            # + GUI/RPA verbs
+computer-manager --version                                    # "manager <version>"
+```
+
+`MANAGER_API_TOKEN` is mandatory — no token, no boot. Every request must send
+`Authorization: Bearer <token>`.
+
+## Control surface (groups)
+
+| Group | Endpoints (representative) | Headless? |
+|---|---|---|
+| system | /ping /health /manager/version | yes |
+| terminal | /execute /sessions | yes |
+| files | upload / download / list | yes |
+| GUI/RPA | screenshot, mouse, keyboard, clipboard, OCR, image-match | needs DISPLAY |
+| perception | `desktop -mode catalog|query|await|watch|diff` (sidecar, via /execute) | needs DISPLAY |
+
+## Key facts an agent should internalize
+
+- **This binary executes commands and writes files by design.** Only install
+  it on machines meant to be handed to a controller; firewall :1337 to the
+  controller's network; TLS-proxy it across the open internet.
+- **Headless is first-class.** terminal/files/system work with no X at all.
+  GUI/RPA + the desktop sidecar need a display — real, or
+  `Xvfb :1 -screen 0 1920x1080x24 &` then `DISPLAY=:1`.
+- **GUI verbs shell out** to xdotool/scrot/xclip/tesseract — install those on
+  the target for RPA work (the installer can: it warns when missing).
+- **Drive it with computer-agent**, not curl: `computer-agent sandboxes add
+  mybox http://<host>:1337 <token>` then `exec`, `screenshot`, `upload`,
+  fleet fan-out, etc.
+- **Perception goes through exec:** `computer-agent exec "desktop -mode
+  catalog -json"` — observe/find/wait with the sidecar, act with the
+  manager's RPA endpoints.
+- **Update = re-run the installer.** Idempotent, sha-verified; prior binary
+  kept at `computer-manager.previous` for one-step rollback. Same for the
+  sidecar (`desktop.previous`).
+- **Token rotation = restart** with a new MANAGER_API_TOKEN.
+- One manager per machine; fleets are a client-side concept.
