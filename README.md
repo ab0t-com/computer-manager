@@ -57,6 +57,38 @@ PREFIX=$HOME/.local curl -fsSL .../install.sh | sh
 Or grab the binary from [`release/`](release/) (a static `linux-amd64` build,
 no runtime deps) and verify it against [`release/checksums.txt`](release/checksums.txt).
 
+### Install **and run it as a service** (any environment)
+
+`install.sh` only installs the binary. To install **and** bring the manager up
+as a managed, auto-restarting, self-registering service — on a laptop, a VM, a
+container, or cloud user-data — use the bootstrap wrapper. Everything
+instance-specific is passed as environment variables (the universal contract):
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/ab0t-com/computer-manager/main/bootstrap.sh \
+  | MANAGER_API_TOKEN=$(openssl rand -hex 32) sh
+```
+
+It installs the binary (via `install.sh`), writes a root-only env-file, installs
+a systemd unit (or a nohup supervisor where systemd is absent), starts it, and
+smoke-tests `/ping`.
+
+| Env var | Default | Meaning |
+|---|---|---|
+| `MANAGER_API_TOKEN` | generated | bearer token the manager enforces (printed if generated) |
+| `MANAGER_API_PORT` | `1337` | main API port |
+| `WORKSPACE_DIR` | `/workspace` | working dir |
+| `ENABLE_FILE_SERVER` | `true` | second listener on `:8081` |
+| `DISPLAY` | — | X display for GUI/RPA verbs |
+| `RESOURCE_SERVICE_CALLBACK_URL` / `_TOKEN` | — | phone-home: the manager registers itself here on boot |
+| `CONTROLLER_API_KEY` | — | proxy-controller self-register key |
+| `ALLOCATION_ID` | — | id used in phone-home/registration |
+| `REF` / `PREFIX` / `REPO` | — | passed through to `install.sh` |
+
+This is how an orchestrator (e.g. the ab0t sandbox platform) brings the manager
+up on a fresh machine: it exports the metadata into the instance's user-data and
+pipes `bootstrap.sh` to `sh`. The same one-liner works by hand on your laptop.
+
 ## Quickstart
 
 ```sh
