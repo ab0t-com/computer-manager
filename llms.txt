@@ -16,6 +16,9 @@
 - `release/checksums.txt` + `release/VERSION` — verify everything you download.
 - `install.sh` — POSIX, HTTPS-only, sha256-mandatory installer for both.
 - `docs/USAGE.md` — env vars, endpoint groups, GUI prereqs, ops notes.
+- `skills/computer-manager-host-setup/` — agent skill: install/run/secure/
+  verify/troubleshoot the manager on a target machine; bundles both
+  binaries in `assets/` for air-gapped installs.
 
 ## Install (on the machine to be controlled)
 

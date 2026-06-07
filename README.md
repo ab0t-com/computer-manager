@@ -101,6 +101,7 @@ computer-manager/
 ├── install.sh      # POSIX, checksum-verified installer (curl | sh)
 ├── release/        # computer-manager + desktop sidecar + checksums.txt + VERSION
 ├── docs/           # USAGE — control surface, env vars, prereqs
+├── skills/         # computer-manager-host-setup — an agent skill (ships both binaries in assets/)
 └── assets/         # README artwork
 ```
 
