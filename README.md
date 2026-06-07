@@ -1,4 +1,12 @@
-# computer-manager
+<p align="center">
+  <img src="assets/hero.png" alt="computer-manager — hero artwork" width="880">
+</p>
+
+<h1 align="center">computer-manager</h1>
+
+<p align="center"><em>makes any Linux machine remotely controllable</em></p>
+
+---
 
 A single static Go binary that turns any Linux machine — a GUI desktop, a
 headless sandbox, a container, a cloud VM — into a **remotely controllable
