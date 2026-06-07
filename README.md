@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/hero.png" alt="computer-manager — hero artwork" width="880">
+  <img src="assets/hero.png" alt="computer-manager — a friendly robot working a terminal at a tidy desk while the human's chair sits empty, the machine on shift" width="880">
 </p>
 
 <h1 align="center">computer-manager</h1>
@@ -100,7 +100,8 @@ variables, and GUI/RPA prerequisites.
 computer-manager/
 ├── install.sh      # POSIX, checksum-verified installer (curl | sh)
 ├── release/        # computer-manager + desktop sidecar + checksums.txt + VERSION
-└── docs/           # USAGE — control surface, env vars, prereqs
+├── docs/           # USAGE — control surface, env vars, prereqs
+└── assets/         # README artwork
 ```
 
 ## License
