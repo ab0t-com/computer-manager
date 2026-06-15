@@ -42,6 +42,14 @@ Xvfb) and the GUI/RPA verbs light up too.
 
 ## Install
 
+**Two entry points — pick by what you want:**
+- **`install.sh`** — just installs the binary (you start it yourself). Best for a
+  laptop / interactive use.
+- **`bootstrap.sh`** — installs **and runs it as a managed service**, configured
+  from environment variables. Best for a VM, container, or cloud user-data — and
+  it's how an orchestrator (the ab0t sandbox platform) brings the manager up.
+  See [Install and run it as a service](#install-and-run-it-as-a-service-any-environment).
+
 ```sh
 curl -fsSL https://raw.githubusercontent.com/ab0t-com/computer-manager/main/install.sh | sh
 ```
