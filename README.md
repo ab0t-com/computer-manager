@@ -16,7 +16,7 @@ GUI/RPA actions, report system state. Think of it as an advanced agent in the
 spirit of a cloud SSM agent, built for AI-driven control.
 
 It is the **server half** of a pair. The client half is
-[`computer-agent`](https://github.com/ab0t-com/computer-agent):
+[`computer-agent`](https://github.com/ab0t-com/computer-cli):
 
 ```
   computer-agent (controller, runs anywhere)

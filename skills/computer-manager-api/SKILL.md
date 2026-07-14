@@ -8,7 +8,7 @@ description: Drive a computer-manager instance directly over its HTTP API — ad
 Everything the manager can do, addressable three ways. Prefer them in order:
 
 1. **`computer-agent` CLI** — friendly verbs over this API. Install:
-   `curl -fsSL https://raw.githubusercontent.com/ab0t-com/computer-agent/main/install.sh | sh`
+   `curl -fsSL https://raw.githubusercontent.com/ab0t-com/computer-cli/main/install.sh | sh`
    (its own skills: `computer-agent-driver`, `computer-agent-usage`).
 2. **Raw HTTP** (this skill) — full surface, including routes the CLI
    doesn't wrap.

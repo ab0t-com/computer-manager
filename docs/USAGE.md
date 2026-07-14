@@ -47,7 +47,7 @@ curl -H "Authorization: Bearer $TOKEN" http://<host>:1337/ping
 | **files** | upload / download / list — move artifacts on and off the box | ✅ |
 | **GUI / RPA** | screenshot, mouse (move/click), keyboard (type/key/hotkey), clipboard, OCR, image-match, computer-use passthrough | needs `DISPLAY` |
 
-The [`computer-agent`](https://github.com/ab0t-com/computer-agent) CLI wraps
+The [`computer-agent`](https://github.com/ab0t-com/computer-cli) CLI wraps
 this entire surface in friendly verbs (`exec`, `upload`, `screenshot`,
 `click`, `ocr`, fleet fan-out across many managers) — use it instead of raw
 curl unless you're integrating directly.

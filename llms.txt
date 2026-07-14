@@ -5,7 +5,7 @@
 > token-authenticated HTTP API on :1337. This file is the **bootstrap
 > entrypoint for an AI agent** that needs to install, run, or reason about
 > the manager. The client/controller half of the pair is `computer-agent`
-> (github.com/ab0t-com/computer-agent) — prefer driving machines through
+> (github.com/ab0t-com/computer-cli) — prefer driving machines through
 > that CLI rather than raw HTTP.
 
 ## What this repo ships
